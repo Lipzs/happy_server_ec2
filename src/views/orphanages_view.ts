@@ -6,11 +6,11 @@ export default {
     return {
       id: orphanage.id,
       name: orphanage.name,
-      latitude: Number(orphanage.latitude),
-      longitude: Number(orphanage.longitude),
+      latitude: orphanage.latitude,
+      longitude: orphanage.longitude,
       about: orphanage.about,
       instructions: orphanage.instructions,
-      //opening_hours: orphanage.opening_hours,
+      opening_hours: orphanage.opening_hours,
       open_on_weekends: orphanage.open_on_weekends,
       images: imagesView.renderMany(orphanage.images),
     }
