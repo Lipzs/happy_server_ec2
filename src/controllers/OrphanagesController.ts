@@ -61,8 +61,8 @@ export default {
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      latitude: Yup.number().required(),
-      longitude: Yup.number().required(),
+      latitude: Yup.string().required(),
+      longitude: Yup.string().required(),
       about: Yup.string().required().max(300),
       instructions: Yup.string().required(),
       opening_hours: Yup.string().required(),
