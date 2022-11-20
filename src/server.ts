@@ -18,5 +18,5 @@ app.use(errorHandler);
 app.use('/images', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.listen(process.env.PORT || 3333, () => {
-  console.log('Server started!');
+  console.log(`Server started! on port ${process.env.PORT}`);
 });
