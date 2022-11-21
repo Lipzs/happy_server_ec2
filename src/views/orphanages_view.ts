@@ -1,5 +1,5 @@
-import Orphanage from "../models/Orphanage";
-import imagesView from './images_view';
+import Orphanage from '../models/Orphanage';
+import ImagesViews from './images_views';
 
 export default {
   render(orphanage: Orphanage) {
@@ -12,11 +12,9 @@ export default {
       instructions: orphanage.instructions,
       opening_hours: orphanage.opening_hours,
       open_on_weekends: orphanage.open_on_weekends,
-      images: imagesView.renderMany(orphanage.images),
-    }
+      whatsapp: orphanage.whatsapp,
+      images: orphanage.images.map(image => ImagesViews.render(image)),
+      url: `${process.env.BASE_URL}/v1/orphanages/${orphanage.id}`,
+    };
   },
-
-  renderMany(orphanages: Orphanage[]) {
-    return orphanages.map(orphanage => this.render(orphanage));
-  }
-}
+};

@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+
 import Image from './Image';
 
 @Entity('orphanages')
@@ -10,10 +17,10 @@ export default class Orphanage {
   name: string;
 
   @Column()
-  latitude: string;
+  latitude: number;
 
   @Column()
-  longitude: string;
+  longitude: number;
 
   @Column()
   about: string;
@@ -28,8 +35,11 @@ export default class Orphanage {
   open_on_weekends: boolean;
 
   @OneToMany(() => Image, image => image.orphanage, {
-    cascade: ['insert', 'update']
+    cascade: ['insert', 'update'],
   })
   @JoinColumn({ name: 'orphanage_id' })
   images: Image[];
+
+  @Column()
+  whatsapp: string;
 }

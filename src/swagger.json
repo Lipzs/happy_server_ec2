@@ -1,0 +1,256 @@
+{
+  "openapi":"3.0.2",
+  "info": {
+    "title":"Happy",
+    "version":"1.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/DiegoVictor/happy-api/master/LICENSE"
+    }
+  },
+  "servers": [
+    {
+      "url":"http://localhost:3333/v1"
+    }
+  ],
+  "paths": {
+    "/orphanages": {
+      "get": {
+        "tags": ["orphanages"],
+        "responses": {
+          "200": {
+            "description": "Lists orphanages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Orphanage"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Lar das meninas 3",
+                    "latitude": -22.4259997,
+                    "longitude": -46.957406,
+                    "about": "Adipisci cupiditate illo rerum sunt tempore. Non voluptate laborum enim hic tenetur perspiciatis sint. Quo totam recusandae dolores et ullam commodi. Ut consectetur saepe id voluptatem et quidem. Dolor neque consequuntur ipsa. Placeat sit aut nostrum similique dolorem voluptatem et velit enim.",
+                    "instructions": "Venha visitar",
+                    "opening_hours": "Das 8h às 18h",
+                    "open_on_weekends": false,
+                    "whatsapp": "11598452667",
+                    "images": [
+                      {
+                        "id": 1,
+                        "path": "http://localhost:3333/uploads/1628982869145.jpg"
+                      }
+                    ],
+                    "url": "http://localhost:3333/v1/orphanages/1"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["orphanages"],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "latitude",
+                  "longitude",
+                  "about",
+                  "instructions",
+                  "opening_hours",
+                  "open_on_weekends",
+                  "whatsapp",
+                  "images"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "latitude": {
+                    "type": "number"
+                  },
+                  "longitude": {
+                    "type": "number"
+                  },
+                  "about": {
+                    "type": "string"
+                  },
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "opening_hours": {
+                    "type": "string"
+                  },
+                  "open_on_weekends": {
+                    "type": "boolean"
+                  },
+                  "whatsapp": {
+                    "type": "string"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new orphanage",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orphanage"
+                },
+                "examples": {
+                  "Orphanage": {
+                    "$ref": "#/components/examples/Orphanage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orphanages/{id}": {
+      "get": {
+        "tags": ["orphanages"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return one orphanage",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orphanage"
+                },
+                "examples": {
+                  "Orphanage": {
+                    "$ref": "#/components/examples/Orphanage"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Orphanage not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Orphanage not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Orphanage": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "about": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "opening_hours": {
+            "type": "string"
+          },
+          "open_on_weekends": {
+            "type": "boolean"
+          },
+          "whatsapp": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "path": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "examples": {
+      "Orphanage": {
+        "value": {
+          "id": 1,
+          "name": "Lar das meninas 3",
+          "latitude": -22.4259997,
+          "longitude": -46.957406,
+          "about": "Adipisci cupiditate illo rerum sunt tempore. Non voluptate laborum enim hic tenetur perspiciatis sint. Quo totam recusandae dolores et ullam commodi. Ut consectetur saepe id voluptatem et quidem. Dolor neque consequuntur ipsa. Placeat sit aut nostrum similique dolorem voluptatem et velit enim.",
+          "instructions": "Venha visitar",
+          "opening_hours": "Das 8h às 18h",
+          "open_on_weekends": false,
+          "whatsapp": "11598452667",
+          "images": [
+            {
+              "id": 1,
+              "path": "http://localhost:3333/uploads/1628982869145.jpg"
+            }
+          ],
+          "url": "http://localhost:3333/v1/orphanages/1"
+        }
+      }
+    }
+  }
+}
