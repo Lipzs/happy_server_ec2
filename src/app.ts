@@ -9,7 +9,7 @@ import swagger from 'swagger-ui-express';
 
 import './database';
 
-import swaggerDocument from './swagger.json';
+// import swaggerDocument from './swagger.json';
 import routes from './routes';
 import errorHandler from './errors/handler';
 
@@ -19,7 +19,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use('/docs', swagger.serve, swagger.setup(swaggerDocument));
+// app.use('/docs', swagger.serve, swagger.setup(swaggerDocument));
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 app.use('/v1', routes);
