@@ -15,11 +15,11 @@ export default class Orphanage {
   @Column()
   name: string;
 
-  @Column()
-  latitude: number;
+  @Column({type: 'real'})
+  latitude: string;
 
-  @Column()
-  longitude: number;
+  @Column({type: 'real'})
+  longitude: string;
 
   @Column()
   about: string;
