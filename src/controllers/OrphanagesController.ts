@@ -102,9 +102,12 @@ export default {
     const { id } = request.params;
 
     const orphanageRepository = getRepository(Orphanage);
+    const imageRepository = getRepository(Image);
 
+    const image = await imageRepository.find({ where: {orphanage_id: id} })
     const orphanage = await orphanageRepository.findOne({ where: { id } });
 
+    await imageRepository.delete(image);
     await orphanageRepository.delete(orphanage);
 
     return response.status(200).json(orphanage);
