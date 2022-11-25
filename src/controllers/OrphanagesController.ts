@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 
 import { getRepository } from 'typeorm';
 import Orphanage from '../models/Orphanage';
-import Image from '../models/Image';
 
 import orphanageView from '../views/orphanage_view';
 
@@ -103,12 +102,9 @@ export default {
     const { id } = request.params;
 
     const orphanageRepository = getRepository(Orphanage);
-    const imageRepository = getRepository(Image);
 
-    const image = await imageRepository.find({ where: {orphanage_id: id} })
     const orphanage = await orphanageRepository.findOne({ where: { id } });
 
-    await imageRepository.delete(image);
     await orphanageRepository.delete(orphanage);
 
     return response.status(200).json(orphanage);
